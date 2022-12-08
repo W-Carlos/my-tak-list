@@ -1,32 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import React, { useState } from "react"
+import { v4 as uuid } from 'uuid';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [ list, setList ] = useState([])
+  const [ inputValue, setInputValue ] = useState('')
+
+  // Função com o valor do input
+  function inputChange(event) {
+    setInputValue(event.target.value)
+  }
+
+  // Função para adicionar nova tarefa
+  function AddTask() {
+    setList([...list, { id: uuid(), task: inputValue }])
+  }
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <div>
+      <input onChange={inputChange} type="text" placeholder="Adicionar uma nova tarefa" />
+      <button onClick={AddTask}>Criar</button>
+
+      <ul>
+        {
+          list.map( item => (
+            <li key={item.id}>{item.task}</li>
+          ))
+        }
+      </ul>
     </div>
   )
 }
