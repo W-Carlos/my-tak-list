@@ -106,5 +106,5 @@ export const Trash = styled(FiTrash2)`
     width: 2.1rem;
     height: 2.1rem;
     cursor: pointer;
-    color: #f2f2f2;
+    color: #808080;
 `;

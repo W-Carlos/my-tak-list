@@ -38,6 +38,17 @@ function App() {
     setList(newList)
   }
 
+  // Função para remover tarefa
+  function removeTask(id) {
+    const newList = list.filter((item) => {
+      if(item.id === id) return false
+
+      return true
+    })
+
+    setList(newList)
+  }
+
   return (
     <Container>
       <ContainerItems>
@@ -58,7 +69,7 @@ function App() {
             <ListItem key={item.id} ischecked={item.finished}>
               <Check onClick={() => finishedTask(item.id)} />
               <li>{item.task}</li>
-              <Trash />
+              <Trash onClick={ () => removeTask(item.id) } />
             </ListItem>
           ))}
         </ul>
