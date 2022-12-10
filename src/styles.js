@@ -3,15 +3,27 @@ import { FiPlusCircle, FiCheck, FiTrash2 } from "react-icons/fi";
 
 export const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
 
-  background-color: #454545;
+  background-color: #191919;
 `;
 
-export const ContainerItems = styled.div``;
+export const ContainerItems = styled.div`
+  display: flex;
+
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 10rem;
+`;
+
+export const ImageLogo = styled.img`
+  margin: 7.2rem 0 5.3rem 0;
+  width: 126px;
+  height: 48px;
+`
 
 export const ContainerInput = styled.div`
   display: flex;
@@ -108,3 +120,29 @@ export const Trash = styled(FiTrash2)`
     cursor: pointer;
     color: #808080;
 `;
+
+export const ContainerItemsEmpyt = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  img {
+    margin-bottom: 1.6rem;
+  }
+
+  p {
+    font-style: normal;
+    font-size: 1.6rem;
+    line-height: 140%;
+    text-align: center;
+    color: #808080;
+  }
+
+  .paragraphBold {
+    font-weight: 700;
+  }
+
+  .paragraphNormal {
+    font-weight: 400;
+  }
+`

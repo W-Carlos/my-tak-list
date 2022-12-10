@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { v4 as uuid } from "uuid";
+import Logo from './assets/Logo.png'
+import Icon from './assets/Clipboard.png'
 import {
   Container,
   ContainerItems,
+  ImageLogo,
   ContainerInput,
   Input,
   Button,
   AddButton,
   ListItem,
   Check,
-  Trash
+  Trash,
+  ContainerItemsEmpyt
 } from "./styles";
 
 function App() {
@@ -26,6 +30,7 @@ function App() {
     // Array com o objeto das novas tarefas
     // Spread operator vai esparramar tudo dentro do array e vai colocar um item abaixo do outro
     setList([...list, { id: uuid(), task: inputValue, finished: false }]);
+    console.log(list)
   }
 
   // Função para marcar tarefa como concluida
@@ -52,6 +57,7 @@ function App() {
   return (
     <Container>
       <ContainerItems>
+      <ImageLogo src={Logo} alt="Logo"/>
         <ContainerInput>
           <Input
             onChange={inputChange}
@@ -65,13 +71,24 @@ function App() {
         </ContainerInput>
 
         <ul>
-          {list.map((item) => (
+          { list.length > 0 ? (
+             list.map((item) => (
             <ListItem key={item.id} ischecked={item.finished}>
               <Check onClick={() => finishedTask(item.id)} />
               <li>{item.task}</li>
               <Trash onClick={ () => removeTask(item.id) } />
             </ListItem>
-          ))}
+            ))
+          ) : (
+            <ContainerItemsEmpyt>
+              <img src={Icon} alt="Icone de tarefa vazia" />
+              <p className="paragraphBold">
+                <b>Você ainda não tem tarefas cadastradas</b><br />
+              </p>
+              <p className="paragraphNormal">Crie tarefas e organize seus itens a fazer</p>
+            </ContainerItemsEmpyt>
+          )
+        }
         </ul>
       </ContainerItems>
     </Container>
