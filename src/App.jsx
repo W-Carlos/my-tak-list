@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
 import Logo from './assets/Logo.png'
 import Icon from './assets/Clipboard.png'
@@ -20,6 +20,18 @@ function App() {
   const [list, setList] = useState([]); // Estado para montar a lista
   const [inputValue, setInputValue] = useState(""); // Estado com o valor digitado no input
 
+  // Carregando as tarefas salvas no localStorage
+  useEffect(() => {
+    const loadListData = localStorage.getItem("list: listData")
+
+    // Verificando se tem algun dado salvo no localStorage. Se tiver o array list vai armazenar as informações
+    if(loadListData) {
+      setList(JSON.parse(loadListData))
+    }
+    
+    //console.log(JSON.parse(loadListData))
+  }, [])
+
   // Função que pega o valor do input
   function inputChange(event) {
     setInputValue(event.target.value);
@@ -30,7 +42,10 @@ function App() {
     // Array com o objeto das novas tarefas
     // Spread operator vai esparramar tudo dentro do array e vai colocar um item abaixo do outro
     setList([...list, { id: uuid(), task: inputValue, finished: false }]);
-    console.log(list)
+
+    // Armazenando as tarefas no localStorage
+    localStorage.setItem("list: listData", JSON.stringify([...list, { id: uuid(), task: inputValue, finished: false }]))
+
   }
 
   // Função para marcar tarefa como concluida
@@ -52,6 +67,10 @@ function App() {
     })
 
     setList(newList)
+    
+    //const DeleteItemLocalStorage = localStorage.removeItem("list: listData")
+
+    
   }
 
   return (
