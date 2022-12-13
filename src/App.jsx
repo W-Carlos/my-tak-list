@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { v4 as uuid } from "uuid";
+import { stringify, v4 as uuid } from "uuid";
 import Logo from './assets/Logo.png'
 import Icon from './assets/Clipboard.png'
 import {
@@ -41,7 +41,9 @@ function App() {
   function AddTask() {
     // Array com o objeto das novas tarefas
     // Spread operator vai esparramar tudo dentro do array e vai colocar um item abaixo do outro
-    setList([...list, { id: uuid(), task: inputValue, finished: false }]);
+    if(inputValue){
+      setList([...list, { id: uuid(), task: inputValue, finished: false }]);
+    }
 
     // Armazenando as tarefas no localStorage
     localStorage.setItem("list: listData", JSON.stringify([...list, { id: uuid(), task: inputValue, finished: false }]))
@@ -56,6 +58,8 @@ function App() {
     )
 
     setList(newList)
+
+    localStorage.setItem("list: listData", JSON.stringify([...newList]))
   }
 
   // Função para remover tarefa
