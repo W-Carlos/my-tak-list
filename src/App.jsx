@@ -59,6 +59,7 @@ function App() {
 
     setList(newList)
 
+    // Atualizando o status da tarefa no localStorage
     localStorage.setItem("list: listData", JSON.stringify([...newList]))
   }
 
@@ -72,9 +73,8 @@ function App() {
 
     setList(newList)
     
-    //const DeleteItemLocalStorage = localStorage.removeItem("list: listData")
-
-    
+    // Atualizando lista no localStorage quando um item é deletado
+    localStorage.setItem("list: listData", JSON.stringify([...newList]))
   }
 
   return (
